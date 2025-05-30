@@ -23,6 +23,9 @@ models:
   - name: orders_sub
     config:
       alias: order_sub_tbl
+    tests:
+      - dbt_expectations.expect_table_row_count_to_equal_other_table:
+          compare_model: ref("orders")
   - name: orders_details
     config:
       materialized: view
@@ -45,3 +48,4 @@ models:
     tests:
       - dbt_utils.expression_is_true:
           expression: "customerNumber > 0"
+    
